@@ -28,5 +28,5 @@ end
 
 group :production do
   gem 'therubyracer-heroku', '0.8.1.pre3'
-  gem 'pg', '0.15.1'
+  gem 'pg'
 end
