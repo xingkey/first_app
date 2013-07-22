@@ -3,6 +3,7 @@ ruby '1.9.3'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'rails', '4.0.0'
 gem 'bcrypt-ruby', '3.0.1'
+gem 'heroku'
 
 group :development, :test do
   gem 'sqlite3', '1.3.7'
@@ -27,6 +28,7 @@ group :doc do
 end
 
 group :production do
+  gem 'thin'
   gem 'therubyracer-heroku', '0.8.1.pre3'
   gem 'pg'
 end
