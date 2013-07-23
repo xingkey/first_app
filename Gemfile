@@ -34,6 +34,6 @@ end
 
 group :production do
   gem 'thin'
-  gem 'therubyracer-heroku', '0.8.1.pre3'
+  gem 'rails_12factor', '0.0.2'
   gem 'pg'
 end
