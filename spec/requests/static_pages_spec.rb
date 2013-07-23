@@ -1,21 +1,26 @@
 require 'spec_helper'
 
-describe "User pages" do
+describe "Static pages" do
 
   subject { page }
 
-  describe "profile page" do
-    let(:user) { FactoryGirl.create(:user) }
-    before { visit user_path(user) }
+  describe "Home page" do
+ 
+    describe "for signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do
+        FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
+        FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
+        sign_in user
+        visit root_path
+      end
 
-    it { should have_content(user.name) }
-    it { should have_title(user.name) }
+      it "should render the user's feed" do
+        user.feed.each do |item|
+          expect(page).to have_selector("li##{item.id}", text: item.content)
+        end
+      end
+    end
   end
 
-  describe "signup page" do
-    before { visit signup_path }
-
-    it { should have_content('Sign up') }
-    it { should have_title(full_title('Sign up')) }
-  end
 end
