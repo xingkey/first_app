@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, only: [:edit, :update]
+  before_action :signed_in_user, only: [:index, :edit, :update]
   before_action :correct_user,   only: [:edit, :update]
+  
+  def index
+    @users = User.paginate(page: params[:page])
+  end
+  
   def new
     @user = User.new
   end
@@ -44,6 +49,7 @@ class UsersController < ApplicationController
     # Before filters
 
     def signed_in_user
+      store_location
       redirect_to signin_url, notice: "Please sign in." unless signed_in?
     end
     
